@@ -8,10 +8,10 @@ import cadquery as cq
 class SecurityCameraMount:
     """The mount for a security camera."""
 
-    camera_radius: float = 28
+    camera_radius: float = 29
     """The radius of the mount for the security camera."""
 
-    solar_panel_radius: float = 26
+    solar_panel_radius: float = 27
     """The radius of the solar panel part of the camera."""
 
     bolt_diameter: float = 4.4
@@ -38,8 +38,8 @@ class SecurityCameraMount:
         bolt_hole = self.get_bolt_hole().translate(
             (self.camera_radius - self.bolt_hole_offset, 0, 0)
         )
-        for x in range(3):
-            mount = mount.cut(bolt_hole).rotate((0, 0, 0), (0, 0, 1), (360 / 3) * x)
+        for _ in range(3):
+            mount = mount.cut(bolt_hole).rotate((0, 0, 0), (0, 0, 1), 360 / 3)
         return mount
 
     def get_solar_panel_mount(self) -> cq.Workplane:
