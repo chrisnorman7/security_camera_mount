@@ -17,8 +17,6 @@ class SecurityCameraMount:
     bolt_diameter: float = 4.4
     """The diameter of the bolt holes to use."""
 
-    bolt_hole_offset: float = 5
-    """The offset for the bolt holes to use."""
     thickness: float = 1
     """The thickness of the plates."""
 
@@ -35,11 +33,9 @@ class SecurityCameraMount:
             .workplane(centerOption="CenterOfMass")
             .hole(self.bolt_diameter)
         )
-        bolt_hole = self.get_bolt_hole().translate(
-            (self.camera_radius - self.bolt_hole_offset, 0, 0)
-        )
+        bolt_hole = self.get_bolt_hole().translate((21.4, 0, 0))
         for _ in range(3):
-            mount = mount.cut(bolt_hole).rotate((0, 0, 0), (0, 0, 1), 360 / 3)
+            mount = mount.cut(bolt_hole).rotate((0, 0, 0), (0, 0, 1), 120)
         return mount
 
     def get_solar_panel_mount(self) -> cq.Workplane:
@@ -51,11 +47,9 @@ class SecurityCameraMount:
             .workplane(centerOption="CenterOfMass")
             .hole(self.bolt_diameter)
         )
-        bolt_hole = self.get_bolt_hole().translate(
-            (self.solar_panel_radius - self.bolt_hole_offset, 0, 0)
-        )
-        for x in range(3):
-            mount = mount.cut(bolt_hole).rotate((0, 0, 0), (0, 0, 1), (360 / 3) * x)
+        bolt_hole = self.get_bolt_hole().translate((19.4, 0, 0))
+        for _ in range(3):
+            mount = mount.cut(bolt_hole).rotate((0, 0, 0), (0, 0, 1), 120)
         return mount
 
     def get_shape(self) -> cq.Compound:
