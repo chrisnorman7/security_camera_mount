@@ -14,8 +14,8 @@ class SecurityCameraMount:
     solar_panel_radius: float = 26
     """The radius of the solar panel part of the camera."""
 
-    bolt_radius: float = 2.2
-    """The radius of the bolts to use."""
+    bolt_diameter: float = 4.4
+    """The diameter of the bolt holes to use."""
 
     def get_security_camera_mount(self) -> cq.Workplane:
         """Get the mount for the security camera."""
@@ -24,7 +24,7 @@ class SecurityCameraMount:
             .cylinder(1, self.camera_radius)
             .faces(">Z")
             .workplane(centerOption="CenterOfMass")
-            .hole(self.bolt_radius)
+            .hole(self.bolt_diameter)
         )
 
     def get_solar_panel_mount(self) -> cq.Workplane:
@@ -34,7 +34,7 @@ class SecurityCameraMount:
             .cylinder(1, self.solar_panel_radius)
             .faces(">Z")
             .workplane(centerOption="CenterOfMass")
-            .hole(self.bolt_radius)
+            .hole(self.bolt_diameter)
         )
 
     def get_shape(self) -> cq.Compound:
